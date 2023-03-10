@@ -15,6 +15,9 @@ import ng.sae.songs203.ui.theme.Songs203Theme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val songInputStream = assets.open("test.l8f")
+        val headerLength = getHeaderLengthFromVideo(songInputStream)
+
         setContent {
             Songs203Theme {
                 // A surface container using the 'background' color from the theme
@@ -22,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting(headerLength)
                 }
             }
         }
@@ -30,14 +33,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
+fun Greeting(name: Int) {
     Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    Songs203Theme {
-        Greeting("Android")
-    }
 }
