@@ -16,7 +16,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val songInputStream = assets.open("test.l8f")
-        val headerLength = getHeaderLengthFromVideo(songInputStream)
+        val header = readHeaderFromVideo(songInputStream)
+        val tvalue = header.Meta.toString()
 
         setContent {
             Songs203Theme {
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting(headerLength)
+                    Greeting(tvalue)
                 }
             }
         }
@@ -33,6 +34,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: Int) {
+fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
